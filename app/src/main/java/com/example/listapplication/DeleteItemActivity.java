@@ -19,11 +19,9 @@ public class DeleteItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove);
-        SharedPreferences list = getApplicationContext().getSharedPreferences(Constants.PREFERENCES_NAME, 0);
-        String mySecretData = list.getString(Constants.DATA_KEY, "");
-        List<String> mySecretDataList = Arrays.asList(mySecretData.split("\\s*,\\s*"));
         Spinner spinner = findViewById(R.id.deleteDataList);
-        spinner.setAdapter(new ArrayAdapter<>(DeleteItemActivity.this,android.R.layout.simple_spinner_item, mySecretDataList));
+        List<String> itemsList = getIntent().getStringArrayListExtra(Constants.LIST_EXTRA_KEY);
+        spinner.setAdapter(new ArrayAdapter<>(DeleteItemActivity.this,android.R.layout.simple_spinner_item, itemsList));
     }
 
     public void mainActivity(View v) {
