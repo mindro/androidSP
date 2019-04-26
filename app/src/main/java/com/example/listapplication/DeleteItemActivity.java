@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,8 +28,12 @@ public class DeleteItemActivity extends AppCompatActivity {
     public void mainActivity(View v) {
         Intent intent = new Intent(DeleteItemActivity.this, MainActivity.class);
         Spinner spinner = findViewById(R.id.deleteDataList);
-        String selectedItem = spinner.getSelectedItem().toString();
-        intent.putExtra(Constants.DELETE_ITEM_KEY, selectedItem);
+        if (spinner.getSelectedItem() != null) {
+            String selectedItem = spinner.getSelectedItem().toString();
+            if (!selectedItem.equals("")) {
+                intent.putExtra(Constants.DELETE_ITEM_KEY, selectedItem);
+            }
+        }
         startActivity(intent);
     }
 

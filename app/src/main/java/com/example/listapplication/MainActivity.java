@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,9 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setItemsListFromSharedPreferences();
-
+        Log.i(Constants.LOGGING_TAG, "Creating main activity");
         String itemToDelete = getIntent().getStringExtra(Constants.DELETE_ITEM_KEY);
         if (itemToDelete != null) {
+            Log.i(Constants.LOGGING_TAG, String.format("Deleting item from list %s", itemToDelete));
             for (Iterator<String> iter = this.itemsList.listIterator(); iter.hasNext(); ) {
                 String a = iter.next();
                 if (a.equalsIgnoreCase(itemToDelete)) {

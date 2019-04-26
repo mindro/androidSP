@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -23,10 +24,11 @@ public class AddItemActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         EditText editText = findViewById(R.id.editText);
+        Log.i(Constants.LOGGING_TAG, String.format("Adding item to list %s", editText.getText().toString()));
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor spEditor = preferences.edit();
         Set<String> updatedSet = preferences.getStringSet(Constants.DATA_KEY, new HashSet<String>());
         updatedSet.add(editText.getText().toString());
+        SharedPreferences.Editor spEditor = preferences.edit();
         spEditor.putStringSet(Constants.DATA_KEY, updatedSet);
         spEditor.apply();
     }
